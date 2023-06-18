@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+ <ul>
+     {% for item in myarray %}
+     <li>{{ item }}</li>
+     {% endfor %}
+ </ul>
+    <ol>
+        {% for k, v in myAssocArray %}
+            <li>{{ k~': '~v }}</li>
+        {% endfor %}
+    </ol>
+    {% if value == true %}
+        <p>valeur positive</p>
+    {% else%}
+        <p>valeur negative </p>
+    {% endif %}
+    <p>il ya {{ myAssocArray | length }} elements</p>
+
+    <h2>{{ 'title'| upper}} </h2>
+    <p>{{ now |date('d/m/y H:i:s' ) }}</p>
+{% endblock %}

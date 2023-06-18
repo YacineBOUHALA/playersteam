@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-4">
+        <a href="{{ url('admin.national.AddNationalTeam') }}" class="btn btn-info">Add New National Team</a>
+        {% for notice in app.flashes('notice') %}
+            <p class="alert alert-success">{{ notice }}</p>
+        {% endfor %}
+        <div class="row">
+            {% for entity in entities %}
+                <div style="margin-top: 4px; width: 200px" class="col md-3">
+                    <div class="card" style="height: 240px; display: block">
+                        {% if '.jpg' in entity.drapeau %}
+                            <img style="width: 200px" src="{{ asset('img/nationalFlags/' ~ entity.drapeau)}}" alt="">
+                        {% else %}
+                            <img style="width: 200px" src="{{ asset('img/nationalFlags/' ~ entity.drapeau~'.jpg')}}" alt="">
+                        {% endif %}
+                        <p>{{ entity.name }}</p>
+                        <a href="{{ url('admin.national.show', {name: entity.name}) }}" class="btn bnt-primary" style="background-color: dodgerblue; align-items:baseline "> See</a>
+                        <a href="{{ url('admin.national.editNationalTeam', {name: entity.name}) }}" class="btn bnt-secondary" style="background-color: orange; align-items:baseline "> Edit</a>
+                        <a href="{{ url('admin.nationalTeam.form.remove', {id: entity.id}) }}" class="btn bnt-danger" style="background-color: red; align-items:baseline "> Remove</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

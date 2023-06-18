@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+ <div class="container">
+   <div class="row">
+    {% for player in entities %}
+         <div class="mt-4 col-md-3">
+           <div class="card" style="text-align: center">
+               <img src="{{ asset('img/'~player.portrait) }}" alt="">
+               <p>{{ (player.firstname ~ ' '~ player.lastname) |upper}}</p>
+               <p>Numero: {{ player.number }}</p>
+               <p>Team: {{ player.team.name }}</p>
+               {% if player.nationalTeam is not null  %}
+                    <p>National Team: {{ player.nationalTeam.name }}</p>
+               {% else %}
+                   <p>No national team</p>
+               {% endif %}
+               <p>Birthday: {{ player.birthday | date('d/m/Y') }}</p>
+               <a class=" btn btn-primary" href="{{ url('player.details',
+                   {
+                   firstname: player.firstname,
+                   lastname: player.lastname,
+                   id: player.id
+                    }
+               ) }}">Detail</a>
+           </div>
+         </div>
+    {% endfor %}
+
+   </div>
+ </div>
+{% endblock %}

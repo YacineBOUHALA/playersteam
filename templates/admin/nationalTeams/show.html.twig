@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 style="text-align: center">{{ name }}</h1>
+    <a href="{{ url('admin.player.form.national.add', {name: name}) }}" class="btn btn-info">Add New Player</a>
+    <a href="{{ url('admin.national.index', {name: name}) }}" class="btn btn-info">Back</a>
+    <a href="{{ url('admin.national.editNationalTeam', {name: name}) }}" class="btn btn-info" style="margin-left: 25%">Edit National Team Properties</a>
+    {% for notice in app.flashes('notice') %}
+        <p class="alert alert-success">{{ notice }}</p>
+    {% endfor %}
+    <table class="table table-striped">
+        <tr>
+            <th> First Name</th>
+            <th> Last Name</th>
+            <th> Team</th>
+            <th> </th>
+        </tr>
+        {% for player in array %}
+            <tr>
+                <td> {{ player.firstname }}</td>
+                <td> {{ player.lastname }}</td>
+                <td> {{ player.team.name }}</td>
+                <td>
+                    <a href="{{ url('admin.player.form.edit', {id: player.id}) }}" class="btn btn-warning">Edit</a>
+                    <a href="{{ url('admin.player.form.national.remove', {id: player.id}) }}" class="btn btn-danger">Remove</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}

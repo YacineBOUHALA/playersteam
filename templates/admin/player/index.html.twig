@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'player' %}
+{% block body %}
+    <div class="container">
+        <h2>Player </h2>
+
+        <p>
+            <a href="{{ url('admin.player.form.add') }}" class="btn btn-info">Add</a>
+            <a href="{{ url('admin.national.index') }}" class="btn btn-info">National Teams</a>
+        </p>
+        <p>
+            {% for notice in app.flashes('notice') %}
+                <p class="alert alert-success">{{ notice }}</p>
+            {% endfor %}
+        </p>
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Team</th>
+                <th>National Team</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for player in entities %}
+                <tr>
+                    {% if player.nationalTeam is not null  %}
+                        <td>{{ player.firstname~ ' '~ player.lastname}}</td>
+                        <td>{{ player.team.name | title}}</td>
+                        <td>{{ player.nationalTeam.name | title}}</td>
+                        {% if '.jpg' in player.nationalTeam.drapeau %}
+                            <td><img style="width: 50px" src="{{ asset('img/nationalFlags/' ~ player.nationalTeam.drapeau)}}" alt=""></td>
+                        {% else %}
+                            <td><img style="width: 50px" src="{{ asset('img/nationalFlags/' ~ player.nationalTeam.drapeau~'.jpg')}}" alt=""></td>
+                        {% endif %}
+
+                    {% else %}
+                        <td>{{ player.firstname~ ' '~ player.lastname}}</td>
+                        <td>{{ player.team.name | title}}</td>
+                        <td> No National Team</td>
+                        <td> <img style="width: 50px" src="{{ asset('img/nationalFlags/default.png')}}" alt=""></td>
+                    {% endif %}
+                    <td>
+                        <a href="{{ url('admin.player.form.edit', {id: player.id}) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ url('admin.player.form.remove', {id: player.id}) }}" class="btn btn-danger">Remove</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

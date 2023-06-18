@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if name == null %}
+         <h2>New National Team</h2>
+    {% else %}
+        <h2>Edit National Team</h2>
+    {% endif %}
+    {{ form_start(form, { attr: { novalidate:"novalidate"}}) }}
+    <p>
+        {{ form_label(form.name, 'Name :') }}
+        {{ form_widget(form.name) }}
+        {{ form_errors(form.name) }}
+    </p>
+    <p>
+        {{ form_label(form.drapeau, 'Flag :') }}
+        {{ form_widget(form.drapeau) }}
+        {{ form_errors(form.drapeau) }}
+    </p>
+        <p>
+            <input type="submit" class="btn btn-primary">
+        </p>
+    {{ form_end(form) }}
+
+{% endblock %}

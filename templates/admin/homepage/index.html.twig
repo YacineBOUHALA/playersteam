@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Admin' %}
+{% block body %}
+    <div class="container">
+
+        <h2 >Dashboard</h2>
+        <p>
+            <a href="{{ url('admin.player.index') }}" class="btn btn-primary">Players</a>
+            <a href="{{ url('admin.national.index') }}" class="btn btn-primary">National Teams</a>
+        </p>
+    </div>
+
+{% endblock %}
