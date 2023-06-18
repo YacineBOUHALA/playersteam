@@ -1,4 +1,4 @@
-# playersteam
+# playersteam projet php symfony
 
 -pour le bon fonctionnement du projet vous devez avoir au minimum une version 8.0 de php et une version 6.0 de symfony  
  
